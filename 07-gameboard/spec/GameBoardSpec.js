@@ -92,7 +92,18 @@ describe ("GameBoardSpec", function(){
       	my_gameboard.remove(nave_propia);
       	my_gameboard.finalizeRemoved();
       	expect(my_gameboard.objects[0]).toBe(undefined);
-      	})
+      })
+      
+      it("Game llama al método step", function(){
+      	my_gameboard.add(nave_propia);
+      	spyOn(nave_propia ,"step")
+      	var dt = 0.1;
+      	my_gameboard.step(dt) 
+      		expect(nave_propia.step).toHaveBeenCalled();
+
+      })
+      	
+      	
       	
     
     
