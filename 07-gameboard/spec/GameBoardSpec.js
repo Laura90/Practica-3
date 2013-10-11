@@ -85,14 +85,14 @@ describe ("GameBoardSpec", function(){
 	 	nave_propia = new PlayerShip();
 	 	my_gameboard.add(nave_propia);
 	 	expect(my_gameboard.objects[0]).toBe(nave_propia);
-      })
+      });
       
       it("Borrando sprites", function(){
       	my_gameboard.resetRemoved();
       	my_gameboard.remove(nave_propia);
       	my_gameboard.finalizeRemoved();
       	expect(my_gameboard.objects[0]).toBe(undefined);
-      })
+      });
       
       it("Game llama al método step", function(){
       	my_gameboard.add(nave_propia);
@@ -101,18 +101,25 @@ describe ("GameBoardSpec", function(){
       	my_gameboard.step(dt);
       	expect(nave_propia.step).toHaveBeenCalled();
 
-      })
+      });
       
       it ("Game llama al método draw" , function(){
       	spyOn(nave_propia, "draw");
       	my_gameboard.draw(ctx);
       	expect(nave_propia.draw).toHaveBeenCalled();
       	
+      });
       
       
-      
-      })
       	
+      it ("Colisión entre objetos", function(){
+      	var nave_enemiga = new PlayerShip();
+      	my_gameboard.add(nave_enemiga);
+      	expect(my_gameboard.collide(nave_propia)).toBe(nave_enemiga);
+
+      
+      
+      });
       	
       	
     

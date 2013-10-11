@@ -205,14 +205,12 @@ var GameBoard = function() {
 
     // Iterador que aplica el método funcName a todos los
     // objetos de objects
+    
+    
     this.iterate = function(funcName) {
 	// Convertimos en un array args (1..)
 	var args = Array.prototype.slice.call(arguments,1);
-
-	for(var i=0, len=this.objects.length; i<len;i++) {
-	    var obj = this.objects[i];
-	    obj[funcName].apply(obj,args)
-	}
+	_.each(this.objects, function(item){item[funcName].apply(item,args)})
     };
 
     // Devuelve el primer objeto de objects para el que func es true
