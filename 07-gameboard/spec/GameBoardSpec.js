@@ -80,14 +80,20 @@ describe ("GameBoardSpec", function(){
     
     my_gameboard = new GameBoard();
     
-     it("Coleccion sprites", function(){
+       
+     it("Añadiendo sprites", function(){
 	 	nave_propia = new PlayerShip();
 	 	my_gameboard.add(nave_propia);
 	 	expect(my_gameboard.objects[0]).toBe(nave_propia);
-    
-    
-    
-    })
+      })
+      
+      it("Borrando sprites", function(){
+      	my_gameboard.resetRemoved();
+      	my_gameboard.remove(nave_propia);
+      	my_gameboard.finalizeRemoved();
+      	expect(my_gameboard.objects[0]).toBe(undefined);
+      	})
+      	
     
     
     
