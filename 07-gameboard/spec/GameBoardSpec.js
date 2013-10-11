@@ -96,11 +96,21 @@ describe ("GameBoardSpec", function(){
       
       it("Game llama al método step", function(){
       	my_gameboard.add(nave_propia);
-      	spyOn(nave_propia ,"step")
+      	spyOn(nave_propia ,"step");
       	var dt = 0.1;
-      	my_gameboard.step(dt) 
-      		expect(nave_propia.step).toHaveBeenCalled();
+      	my_gameboard.step(dt);
+      	expect(nave_propia.step).toHaveBeenCalled();
 
+      })
+      
+      it ("Game llama al método draw" , function(){
+      	spyOn(nave_propia, "draw");
+      	my_gameboard.draw(ctx);
+      	expect(nave_propia.draw).toHaveBeenCalled();
+      	
+      
+      
+      
       })
       	
       	
