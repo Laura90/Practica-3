@@ -215,7 +215,7 @@ var GameBoard = function() {
 
     // Devuelve el primer objeto de objects para el que func es true
     this.detect = function(func) {
-    	if (var item = _.filter(this.objects,function(item){return func.call(item)}) {
+    	if (item = _.filter(this.objects,function(item){return func.call(item)})) {
     		return item[0];
 		}else{
 			return false;
