@@ -94,7 +94,7 @@ describe ("GameBoardSpec", function(){
       	expect(my_gameboard.objects[0]).toBe(undefined);
       });
       
-      it("Game llama al método step", function(){
+      it("Game llama al metodo step", function(){
       	my_gameboard.add(nave_propia);
       	spyOn(nave_propia ,"step");
       	var dt = 0.1;
@@ -103,7 +103,7 @@ describe ("GameBoardSpec", function(){
 
       });
       
-      it ("Game llama al método draw" , function(){
+      it ("Game llama al metodo draw" , function(){
       	spyOn(nave_propia, "draw");
       	my_gameboard.draw(ctx);
       	expect(nave_propia.draw).toHaveBeenCalled();
@@ -112,11 +112,40 @@ describe ("GameBoardSpec", function(){
       
       
       	
-      it ("Colisión entre objetos", function(){
+      it ("Colision entre objetos", function(){
       	var nave_enemiga = new PlayerShip();
       	my_gameboard.add(nave_enemiga);
       	expect(my_gameboard.collide(nave_propia)).toBe(nave_enemiga);
 
+      
+      });
+      
+      it ("Comprobacion metodo iterate",function(){
+      	my_gameboard = new GameBoard();
+      	
+      	var dumm = function()  {
+      	
+      		this.func = function(){}
+      	
+      	}
+      	
+      	var dummy01= new dumm();
+      	spyOn(dummy01, "func");
+      	var dummy02 = new dumm();
+      	spyOn(dummy02, "func");
+      	var dummy03 = new dumm();
+      	spyOn(dummy03, "func");
+      	
+      	my_gameboard.add(dummy01);
+      	my_gameboard.add(dummy02);
+      	my_gameboard.add(dummy03);
+      	
+      	my_gameboard.iterate("func");
+      	expect(dummy01.func).toHaveBeenCalled();
+      	expect(dummy02.func).toHaveBeenCalled();
+      	expect(dummy03.func).toHaveBeenCalled();
+      	
+      
       
       });
       	
