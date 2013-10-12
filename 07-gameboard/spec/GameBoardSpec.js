@@ -118,7 +118,6 @@ describe ("GameBoardSpec", function(){
       	expect(my_gameboard.collide(nave_propia)).toBe(nave_enemiga);
 
       
-      
       });
       	
       	
