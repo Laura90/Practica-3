@@ -148,6 +148,33 @@ describe ("GameBoardSpec", function(){
       
       
       });
+      
+      it ("Comprobacion metodo detect",function(){
+      	my_gameboard = new GameBoard();
+      	
+      	var dummdetect = function()  {
+      	
+      		this.funcd = function(){}
+      	
+      	}
+      	
+      	var dummy01= new dummdetect();
+      	spyOn(dummy01, "funcd");
+      	var dummy02 = new dummdetect();
+      	spyOn(dummy02, "funcd");
+      	var dummy03 = new dummdetect();
+      	spyOn(dummy03, "funcd");
+      	
+      	my_gameboard.add(dummy01);
+      	my_gameboard.add(dummy02);
+      	my_gameboard.add(dummy03);
+      	
+      	elem_1 = my_gameboard.detect(function () {return true});
+      	expect(elem_1).toBe(dummy01);
+      	
+      
+      
+      });
       	
       	
     
