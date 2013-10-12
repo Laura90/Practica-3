@@ -177,7 +177,30 @@ describe ("GameBoardSpec", function(){
       });
       	
       	
+    it ("Comprobacion metodo overlap", function(){
     
+    	
+    	var dummover = function() {
+    		
+    			this.y = 0;
+    			this.h = 5;
+    			this.x = 0;
+    			this.w = 5;
+    
+    	};
+    			
+    			
+    	var dummy01= new dummover();
+      	var dummy02 = new dummover();
+      	
+      	
+      	choque = my_gameboard.overlap(dummy01,dummy02)
+      	expect(choque).toBe(true);
+      	
+
+    	
+    
+    });
     
     
     
