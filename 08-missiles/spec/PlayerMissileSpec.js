@@ -62,6 +62,21 @@ describe("Pruebas de clase PlayerMissile", function(){
 	
 	});
 	
+	it("Comprobacion metodo step de SpriteSheet", function(){
+
+		SpriteSheet = {
+  		map : {missile: { sx: 0, sy: 30, w: 2, h: 10, frames: 1 }},
+  		step: function() {}
+		};
+		
+      	my_missil = new PlayerMissile(1,120);
+      	
+      	my_missil.step(0.1);
+
+      	expect(my_missil.y).toBe(40);
+	
+	
+	});
 	
 	
 });
