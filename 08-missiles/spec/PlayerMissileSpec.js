@@ -27,3 +27,46 @@
     la clase en el prototipo
 
 */
+	
+describe("Pruebas de clase PlayerMissile", function(){
+
+	var canvas, ctx;
+
+    beforeEach(function(){
+	loadFixtures('index.html');
+
+	canvas = $('#game')[0];
+	expect(canvas).toExist();
+
+	ctx = canvas.getContext('2d');
+	expect(ctx).toBeDefined();
+    });
+
+
+	
+	it("Comprobacion metodo draw de SpriteSheet", function(){
+		
+      	my_missil = new PlayerMissile(1,30);
+      	
+      	spyOn(SpriteSheet, "draw");
+      	
+      	my_missil.draw(ctx);
+
+      	expect(SpriteSheet.draw).toHaveBeenCalled();
+	
+	
+	});
+	
+	it("Comprobacion metodo step de SpriteSheet", function(){
+		
+      	my_missil = new PlayerMissile(1,30);
+      	
+      	my_missil.step(0.1);
+
+      	expect(my_missil.y).toBe(-50);
+	
+	
+	});
+	
+	
+});
