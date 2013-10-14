@@ -81,49 +81,79 @@ describe ("GameBoardSpec", function(){
     my_gameboard = new GameBoard();
     
        
-     it("Añadiendo sprites", function(){
-	 	nave_propia = new PlayerShip();
-	 	my_gameboard.add(nave_propia);
-	 	expect(my_gameboard.objects[0]).toBe(nave_propia);
-      });
+	it("Añadiendo sprites", function(){
+		var dummy = function () {
+			this.step = function () {}
+     		this.draw = function () {}	
+     		
+     	}
+     	obj = new dummy()
+
+	 	my_gameboard.add(obj);
+	 	expect(my_gameboard.objects[0]).toBe(obj);
+	});
       
-      it("Borrando sprites", function(){
-      	my_gameboard.resetRemoved();
-      	my_gameboard.remove(nave_propia);
+	it("Borrando sprites", function(){
+		my_gameboard.resetRemoved();
+		my_gameboard.remove(obj);
       	my_gameboard.finalizeRemoved();
+      	
       	expect(my_gameboard.objects[0]).toBe(undefined);
-      });
+	});
       
-      it("Game llama al metodo step", function(){
-      	my_gameboard.add(nave_propia);
-      	spyOn(nave_propia ,"step");
+	it("Game llama al metodo step", function(){
+		my_gameboard.add(obj);
+      	
+      	spyOn(obj ,"step");
+      	
       	var dt = 0.1;
       	my_gameboard.step(dt);
-      	expect(nave_propia.step).toHaveBeenCalled();
-
-      });
+      	
+      	expect(obj.step).toHaveBeenCalled();
+	});
       
-      it ("Game llama al metodo draw" , function(){
-      	spyOn(nave_propia, "draw");
+      
+	it ("Game llama al metodo draw" , function(){
+		spyOn(obj, "draw");
+      	
       	my_gameboard.draw(ctx);
-      	expect(nave_propia.draw).toHaveBeenCalled();
       	
-      });
+      	expect(obj.draw).toHaveBeenCalled();
+      	
+	});
       
       
       	
-      it ("Colision entre objetos", function(){
-      	var nave_enemiga = new PlayerShip();
-      	my_gameboard.add(nave_enemiga);
-      	expect(my_gameboard.collide(nave_propia)).toBe(nave_enemiga);
+	it ("Colision entre objetos", function(){
+      
+		my_gameboard = new GameBoard();
+      
+		var dummycolission = function() {
+    		
+			this.y = 0;
+			this.h = 5;
+			this.x = 0;
+			this.w = 5;
+    
+		};
+    			
+    			
+    	var dummy01= new dummycolission();
+      	var dummy02 = new dummycolission();
+      	
+      	my_gameboard.add(dummy01);
+      	my_gameboard.add(dummy02);
+      	
+      	expect(my_gameboard.collide(dummy01)).toBe(dummy02);
 
       
-      });
+	});
       
-      it ("Comprobacion metodo iterate",function(){
-      	my_gameboard = new GameBoard();
+      
+	it ("Comprobacion metodo iterate",function(){
+		my_gameboard = new GameBoard();
       	
-      	var dumm = function()  {
+		var dumm = function()  {
       	
       		this.func = function(){}
       	
@@ -147,34 +177,32 @@ describe ("GameBoardSpec", function(){
       	
       
       
-      });
+	});
       
-      it ("Comprobacion metodo detect",function(){
+	it ("Comprobacion metodo detect",function(){
       	my_gameboard = new GameBoard();
       	
-      	var dummdetect = function()  {
+      	var dummdetect = function(b)  {
       	
-      		this.funcd = function(){}
+      		this.existe = b
       	
       	}
       	
-      	var dummy01= new dummdetect();
-      	spyOn(dummy01, "funcd");
-      	var dummy02 = new dummdetect();
-      	spyOn(dummy02, "funcd");
-      	var dummy03 = new dummdetect();
-      	spyOn(dummy03, "funcd");
+      	var dummy01 = new dummdetect(false);
+      	var dummy02 = new dummdetect(true);
+      	var dummy03 = new dummdetect(true);
+
       	
       	my_gameboard.add(dummy01);
       	my_gameboard.add(dummy02);
       	my_gameboard.add(dummy03);
       	
-      	elem_1 = my_gameboard.detect(function () {return true});
-      	expect(elem_1).toBe(dummy01);
+      	elem_1 = my_gameboard.detect(function () {return this.existe === true});
+      	expect(elem_1).toBe(dummy02);
       	
       
       
-      });
+	});
       	
       	
     it ("Comprobacion metodo overlap", function(){
