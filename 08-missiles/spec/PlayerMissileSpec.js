@@ -47,8 +47,8 @@ describe("Pruebas de clase PlayerMissile", function(){
 	it("Comprobacion metodo draw de SpriteSheet", function(){
 
 		SpriteSheet = {
-  		map : {missile: { sx: 0, sy: 30, w: 2, h: 10, frames: 1 }},
-  		draw: function() {}
+  			map : {missile: { sx: 0, sy: 30, w: 2, h: 10, frames: 1 }},
+  			draw: function() {}
 		};
 		
       	my_missil = new PlayerMissile(1,30);
@@ -65,8 +65,8 @@ describe("Pruebas de clase PlayerMissile", function(){
 	it("Comprobacion metodo step de SpriteSheet", function(){
 
 		SpriteSheet = {
-  		map : {missile: { sx: 0, sy: 30, w: 2, h: 10, frames: 1 }},
-  		step: function() {}
+  			map : {missile: { sx: 0, sy: 30, w: 2, h: 10, frames: 1 }},
+  			step: function() {}
 		};
 		
       	my_missil = new PlayerMissile(1,120);
@@ -74,7 +74,17 @@ describe("Pruebas de clase PlayerMissile", function(){
       	my_missil.step(0.1);
 
       	expect(my_missil.y).toBe(40);
-	
+      	
+      	my_missil02 = new PlayerMissile(1,30);
+      	my_missil02.board = {remove : function(){}};
+      	
+      	spyOn(my_missil02.board, "remove");
+      	
+      	my_missil02.step(0.1);
+      	
+      	expect(my_missil02.board.remove).toHaveBeenCalled();
+      	
+
 	
 	});
 	
