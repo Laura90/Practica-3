@@ -107,8 +107,33 @@ describe("Clase PlayerShip", function(){
 
 
     });
-
-
+    
+    
+    it("step con tecla pulsada un disparo", function(){
+    	
+    	var mi_nave = new PlayerShip();
+    	mi_nave.board = {add : function(){}};
+    	
+    	SpriteSheet = {
+  			map : {missile: { sx: 0, sy: 30, w: 2, h: 10, frames: 1 }}
+		};
+    	
+    	var dt = 1;
+    	
+    	// Empezamos sin haber pulsado la tecla de disparo
+    	Game = {width: 320, height: 480, keys: {'fire': false}};
+		mi_nave.step(dt);
+		
+		// Pulsamos la tecla de disparo, debería disparar
+		Game = {width: 320, height: 480, keys: {'fire': true}};
+		mi_nave.step(dt);
+		expect(mi_nave.reload).toBe(mi_nave.reloadTime);
+	
+		// Si no soltamos la tecla de disparo, no deberia volver a disparar
+		mi_nave.step(dt);
+		expect(mi_nave.reload).not.toBe(mi_nave.reloadTime);
+	
+	});
 
 });
 
